@@ -12,7 +12,7 @@ const FilterDrawer = ({
   showFuturesFirst
 }) => {
 
-  const [isSortMenuOpen, setIsSortMenuOpen] = useState(false);
+  const [sortMenuVisible, setSortMenuVisible] = useState(false);
   const sortMenuRef = useRef(null);
   const sortButtonRef = useRef(null);
 
@@ -21,29 +21,29 @@ const FilterDrawer = ({
     { key: 'capital', label: 'Capital Market Price' },
     { key: 'futures', label: 'Futures Price' },
   ];
-  
+
   const activeLabel = sortOptions.find(option => option.key === activeSort)?.label || 'Percentage Change';
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleOutsideClick = (event) => {
       if (
         sortMenuRef.current &&
         !sortMenuRef.current.contains(event.target) &&
         sortButtonRef.current &&
         !sortButtonRef.current.contains(event.target)
       ) {
-        setIsSortMenuOpen(false);
+        setSortMenuVisible(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleOutsideClick);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
-  }, [setIsSortMenuOpen]);
+  }, []);
 
   const handleSortClick = (key) => {
     onSortChange(key);
-    setIsSortMenuOpen(false);
+    setSortMenuVisible(false);
   };
 
   return (
@@ -67,7 +67,7 @@ const FilterDrawer = ({
         </div>
 
         <div className="space-y-6 p-5">
-          {/* View Toggle Section - Moved to the top */}
+          {/* View Mode Section */}
           <div>
             <h4 className="mb-3 text-sm tracking-tight font-semibold text-slate-400 uppercase">View Mode</h4>
             <div id="viewToggle" className="flex rounded-lg bg-white/5 ring-1 ring-inset ring-white/10 p-1 w-fit">
@@ -101,10 +101,10 @@ const FilterDrawer = ({
               <div className="relative">
                 <button
                   ref={sortButtonRef}
-                  onClick={() => setIsSortMenuOpen(!isSortMenuOpen)}
+                  onClick={() => setSortMenuVisible(!sortMenuVisible)}
                   className="flex items-center gap-2 h-10 rounded-lg bg-white/5 ring-1 ring-inset ring-white/10 px-3 text-sm transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50"
                   aria-haspopup="menu"
-                  aria-expanded={isSortMenuOpen}
+                  aria-expanded={sortMenuVisible}
                 >
                   <SlidersHorizontal className="size-4 text-slate-300" />
                   <span className="text-slate-200">{activeLabel}</span>
@@ -112,7 +112,7 @@ const FilterDrawer = ({
                 </button>
                 <div
                   ref={sortMenuRef}
-                  className={`absolute z-50 right-auto mt-2 w-[180px] origin-top-right rounded-lg bg-slate-900 ring-1 ring-white/10 shadow-xl backdrop-blur-lg ${isSortMenuOpen ? 'block' : 'hidden'}`}
+                  className={`absolute z-50 right-auto mt-2 w-[180px] origin-top-right rounded-lg bg-slate-900 ring-1 ring-white/10 shadow-xl backdrop-blur-lg ${sortMenuVisible ? 'block' : 'hidden'}`}
                   role="menu"
                 >
                   <div className="p-1">

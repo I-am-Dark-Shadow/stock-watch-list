@@ -1,37 +1,34 @@
 import { useState, useEffect } from 'react';
 
-const formatRelativeTime = (timestamp) => {
+const calcRelativeTime = (timeStamp) => {
   const now = new Date();
-  const date = new Date(timestamp);
-  const seconds = Math.floor((now - date) / 1000);
+  const target = new Date(timeStamp);
+  const diffSeconds = Math.floor((now - target) / 1000);
 
-  if (seconds < 60) {
-    return `${seconds} sec ago`;
-  }
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) {
-    return `${minutes} min ago`;
-  }
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) {
-    return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-  }
-  const days = Math.floor(hours / 24);
-  return `${days} day${days > 1 ? 's' : ''} ago`;
+  if (diffSeconds < 60) return `${diffSeconds} sec ago`;
+
+  const diffMinutes = Math.floor(diffSeconds / 60);
+  if (diffMinutes < 60) return `${diffMinutes} min ago`;
+
+  const diffHours = Math.floor(diffMinutes / 60);
+  if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+
+  const diffDays = Math.floor(diffHours / 24);
+  return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
 };
 
-const useRelativeTime = (timestamp) => {
-  const [relativeTime, setRelativeTime] = useState(formatRelativeTime(timestamp));
+const useRelativeTime = (timeStamp) => {
+  const [timeText, setTimeText] = useState(calcRelativeTime(timeStamp));
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setRelativeTime(formatRelativeTime(timestamp));
+    const timer = setInterval(() => {
+      setTimeText(calcRelativeTime(timeStamp));
     }, 1000);
 
-    return () => clearInterval(interval);
-  }, [timestamp]);
+    return () => clearInterval(timer);
+  }, [timeStamp]);
 
-  return relativeTime;
+  return timeText;
 };
 
 export default useRelativeTime;

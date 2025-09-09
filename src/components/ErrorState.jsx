@@ -1,17 +1,15 @@
 import React from 'react';
 import { RefreshCcw, WifiOff } from 'lucide-react';
 
-
-
 const ErrorState = ({ onRetry }) => {
   return (
     <div className="mt-16 flex flex-col items-center justify-center text-center">
       <div className="mb-4 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-inner">
         <WifiOff className="h-8 w-8 text-rose-400" />
       </div>
-      <h2 className="text-[20px] tracking-tight font-semibold text-white">Something went wrong</h2>
+      <h2 className="text-[20px] font-semibold tracking-tight text-white">Oops! Something went wrong</h2>
       <p className="mt-1 max-w-sm text-sm text-slate-400">
-        We couldn't fetch the latest stock data. Please check your connection or try again.
+        We are unable to load stock data. Please check your network connection or try again.
       </p>
       <button
         onClick={onRetry}

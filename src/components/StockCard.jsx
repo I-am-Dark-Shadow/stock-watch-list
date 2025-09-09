@@ -3,8 +3,9 @@ import { MoreHorizontal, TrendingUp, TrendingDown } from 'lucide-react';
 import useRelativeTime from '../hooks/useRelativeTime';
 import { formatPrice } from '../utils/formatters';
 
-const getInitialColor = (symbol) => {
-  const colors = {
+// Assign background colors based on the first character of the symbol
+const assignColor = (symbol) => {
+  const colorMap = {
     A: 'bg-indigo-500', B: 'bg-red-500', C: 'bg-pink-500', D: 'bg-purple-500',
     E: 'bg-gray-500', F: 'bg-lime-500', G: 'bg-green-500', H: 'bg-cyan-500',
     I: 'bg-emerald-500', J: 'bg-yellow-500', K: 'bg-orange-500', L: 'bg-blue-500',
@@ -13,68 +14,65 @@ const getInitialColor = (symbol) => {
     U: 'bg-teal-500', V: 'bg-violet-500', W: 'bg-lime-500', X: 'bg-stone-500',
     Y: 'bg-blue-500', Z: 'bg-fuchsia-500',
   };
-  return colors[symbol.charAt(0).toUpperCase()] || 'bg-slate-500';
+  return colorMap[symbol.charAt(0).toUpperCase()] || 'bg-slate-500';
 };
 
 const StockCard = ({ stock, onCardClick, showFuturesFirst = true, isCompactView, activeSort }) => {
-  const [showFutures, setShowFutures] = useState(showFuturesFirst);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const lastUpdatedText = useRelativeTime(stock.lastUpdatedTimestamp);
-  const menuRef = useRef(null);
-  const buttonRef = useRef(null);
+  const [viewFutures, setViewFutures] = useState(showFuturesFirst);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const timeAgo = useRelativeTime(stock.lastUpdatedTimestamp);
+  const menuElement = useRef(null);
+  const buttonElement = useRef(null);
 
-  // Price differences
-  const FMC = stock.futuresLastTradedPrice - stock.capitalMarketLastTradedPrice;
-  const CMF = stock.capitalMarketLastTradedPrice - stock.futuresLastTradedPrice;
-  const FMCColor = FMC >= 0 ? 'bg-green-900/30 text-green-400' : 'bg-red-900/30 text-red-400';
-  const CMFColor = CMF >= 0 ? 'bg-green-900/30 text-green-400' : 'bg-red-900/30 text-red-400';
+  // Compute differences in prices
+  const futuresMinusCapital = stock.futuresLastTradedPrice - stock.capitalMarketLastTradedPrice;
+  const capitalMinusFutures = stock.capitalMarketLastTradedPrice - stock.futuresLastTradedPrice;
+  const futuresColor = futuresMinusCapital >= 0 ? 'bg-green-900/30 text-green-400' : 'bg-red-900/30 text-red-400';
+  const capitalColor = capitalMinusFutures >= 0 ? 'bg-green-900/30 text-green-400' : 'bg-red-900/30 text-red-400';
 
-  // Which price to show
-  let price;
+  // Choose which price to display
+  let currentPrice;
   if (activeSort === 'futures') {
-    price = stock.futuresLastTradedPrice;
+    currentPrice = stock.futuresLastTradedPrice;
   } else if (activeSort === 'capital') {
-    price = stock.capitalMarketLastTradedPrice;
+    currentPrice = stock.capitalMarketLastTradedPrice;
   } else {
-    price = stock.capitalMarketLastTradedPrice; // Default to capital if 'change' is active
+    currentPrice = stock.capitalMarketLastTradedPrice;
   }
 
-  const priceType = showFutures ? `F - C = ${FMC.toFixed(2)}` : `C - F = ${CMF.toFixed(2)}`;
+  const priceDifferenceText = viewFutures ? `F - C = ${futuresMinusCapital.toFixed(2)}` : `C - F = ${capitalMinusFutures.toFixed(2)}`;
 
-  // Price change and percentage
-  const percentageChange = stock.percentageChange;
-  const displayValue = `${Math.abs(percentageChange).toFixed(2)} %`;
-  const changeValue = percentageChange;
-  const changeColor = changeValue >= 0 ? 'bg-green-900/30 text-green-400' : 'bg-red-900/30 text-red-400';
-  const changeIcon = changeValue >= 0 ? <TrendingUp size={14} /> : <TrendingDown size={14} />;
+  // Calculate percentage change and styling
+  const percentage = stock.percentageChange;
+  const changeDisplay = `${Math.abs(percentage).toFixed(2)} %`;
+  const changeColor = percentage >= 0 ? 'bg-green-900/30 text-green-400' : 'bg-red-900/30 text-red-400';
+  const changeIcon = percentage >= 0 ? <TrendingUp size={14} /> : <TrendingDown size={14} />;
+  const progressColor = percentage >= 0 ? 'bg-green-500' : 'bg-red-500';
 
-  const barColor = percentageChange >= 0 ? 'bg-green-500' : 'bg-red-500';
-
-  // Effects
   useEffect(() => {
-    setShowFutures(showFuturesFirst);
+    setViewFutures(showFuturesFirst);
   }, [showFuturesFirst]);
 
-  const handleMenuClick = (e) => {
+  const toggleMenu = (e) => {
     e.stopPropagation();
-    setIsMenuOpen(!isMenuOpen);
+    setMenuVisible(!menuVisible);
   };
 
-  const handleViewSelect = (e, viewType) => {
+  const selectView = (e, viewType) => {
     e.stopPropagation();
-    setShowFutures(viewType === 'futures');
-    setIsMenuOpen(false);
+    setViewFutures(viewType === 'futures');
+    setMenuVisible(false);
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target) &&
-        buttonRef.current &&
-        !buttonRef.current.contains(event.target)
+        menuElement.current &&
+        !menuElement.current.contains(event.target) &&
+        buttonElement.current &&
+        !buttonElement.current.contains(event.target)
       ) {
-        setIsMenuOpen(false);
+        setMenuVisible(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -83,19 +81,19 @@ const StockCard = ({ stock, onCardClick, showFuturesFirst = true, isCompactView,
     };
   }, []);
 
-  const cardClasses = isCompactView
+  const containerClasses = isCompactView
     ? `bg-[#181D31] text-white p-4 rounded-xl shadow-lg border border-gray-700 w-full cursor-pointer transition-all duration-300 transform hover:shadow-cyan-500/50 hover:shadow-2xl relative`
     : `bg-[#181D31] text-white p-4 rounded-xl shadow-lg border border-gray-700 w-full cursor-pointer transition-all duration-300 transform hover:scale-105 hover:shadow-cyan-500/50 hover:shadow-2xl relative`;
 
   return (
     <div
-      className={cardClasses}
+      className={containerClasses}
       onClick={() => onCardClick(stock)}
     >
-      {/* Header */}
+      {/* Header section */}
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center space-x-2">
-          <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-md font-bold ${getInitialColor(stock.tradingSymbol)}`}>
+          <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-md font-bold ${assignColor(stock.tradingSymbol)}`}>
             {stock.tradingSymbol.charAt(0)}
           </div>
           <h2 className="text-sm font-semibold">
@@ -103,63 +101,63 @@ const StockCard = ({ stock, onCardClick, showFuturesFirst = true, isCompactView,
           </h2>
         </div>
         <button
-          ref={buttonRef}
-          onClick={handleMenuClick}
+          ref={buttonElement}
+          onClick={toggleMenu}
           className="p-1 rounded-full hover:bg-gray-700 transition-colors"
         >
           <MoreHorizontal size={16} />
         </button>
       </div>
 
-      {/* Responsive Dropdown Menu */}
-      {isMenuOpen && (
+      {/* Dropdown menu */}
+      {menuVisible && (
         <div
-          ref={menuRef}
+          ref={menuElement}
           className="absolute right-2 top-13 z-50 lg:w-fit w-[137px] rounded-md bg-[#2d3748] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:w-52 sm:right-3"
         >
           <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             <button
-              onClick={(e) => handleViewSelect(e, 'capital')}
+              onClick={(e) => selectView(e, 'capital')}
               className=" w-full text-left px-4 py-2 lg:text-sm text-xs text-gray-200 hover:bg-gray-600 lg:flex block justify-between items-center"
               role="menuitem"
             >
               Capital – Futures
-              <span className={` mt-1 lg:mt-0 lg:ml-2 -ml-1 flex items-center gap-1 px-2 py-1 lg:rounded-full rounded w-fit text-xs font-medium ${CMFColor}`}>
-                <span>{`₹ ${CMF.toFixed(2)}`}</span>
+              <span className={` mt-1 lg:mt-0 lg:ml-2 -ml-1 flex items-center gap-1 px-2 py-1 lg:rounded-full rounded w-fit text-xs font-medium ${capitalColor}`}>
+                <span>{`₹ ${capitalMinusFutures.toFixed(2)}`}</span>
               </span>
             </button>
             <button
-              onClick={(e) => handleViewSelect(e, 'futures')}
+              onClick={(e) => selectView(e, 'futures')}
               className=" w-full text-left px-4 py-2 lg:text-sm text-xs text-gray-200 hover:bg-gray-600 lg:flex block justify-between items-center"
               role="menuitem"
             >
               Futures – Capital
-              <span className={` mt-1 lg:mt-0 lg:ml-2 -ml-1 flex items-center gap-1 px-2 py-1 lg:rounded-full rounded w-fit text-xs font-medium ${FMCColor}`}>
-                <span>{`₹ ${FMC.toFixed(2)}`}</span>
+              <span className={` mt-1 lg:mt-0 lg:ml-2 -ml-1 flex items-center gap-1 px-2 py-1 lg:rounded-full rounded w-fit text-xs font-medium ${futuresColor}`}>
+                <span>{`₹ ${futuresMinusCapital.toFixed(2)}`}</span>
               </span>
             </button>
           </div>
         </div>
       )}
 
-      {/* Price and Change */}
+      {/* Price and change display */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center my-3 gap-2 sm:gap-0">
-        <span className="text-xl font-bold">₹{formatPrice(price)}</span>
+        <span className="text-xl font-bold">₹{formatPrice(currentPrice)}</span>
         <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${changeColor}`}>
           {changeIcon}
-          <span>{displayValue}</span>
+          <span>{changeDisplay}</span>
         </div>
       </div>
 
-      {/* Price Type and Last Updated */}
+      {/* Price type and last update */}
       <div className="flex flex-col sm:flex-row justify-between text-xs text-gray-400">
-        <p>{priceType}</p>
-        <p>{lastUpdatedText}</p>
+        <p>{priceDifferenceText}</p>
+        <p>{timeAgo}</p>
       </div>
 
-      {/* Progress Bar */}
+      {/* Progress bar */}
       <div className="h-1 bg-gray-600 rounded-full mt-4">
-        <div className={`h-full w-full rounded-full ${barColor}`}></div>
+        <div className={`h-full w-full rounded-full ${progressColor}`}></div>
       </div>
     </div>
   );

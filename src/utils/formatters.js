@@ -1,25 +1,25 @@
-export const formatPrice = (price) => {
+// Format a price to Indian decimal style with 2 decimal
+export const formatPrice = (amount) => {
   return new Intl.NumberFormat('en-IN', {
     style: 'decimal',
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(price);
+    maximumFractionDigits: 2
+  }).format(amount);
 };
 
-export const formatPercentage = (percentage) => {
+// Format a percentage value with 2 decimal 
+export const formatPercentage = (value) => {
+  const absValue = Math.abs(value);
   return new Intl.NumberFormat('en-IN', {
     style: 'decimal',
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  }).format(Math.abs(percentage));
+    maximumFractionDigits: 2
+  }).format(absValue);
 };
 
-export const formatFuturesDifference = (capitalPrice, futuresPrice, view) => {
-  const diff = Math.abs(capitalPrice - futuresPrice).toFixed(2);
-  const sign = (futuresPrice - capitalPrice) >= 0 ? '▲' : '▼';
-  if (view === 'capital') {
-    return `${sign} ₹${diff}`;
-  } else {
-    return `${sign} ₹${diff}`;
-  }
+
+export const formatFuturesDifference = (capitalPrice, futuresPrice) => {
+  const difference = Math.abs(futuresPrice - capitalPrice).toFixed(2);
+  const arrow = futuresPrice >= capitalPrice ? '▲' : '▼';
+  return `${arrow} ₹${difference}`;
 };
