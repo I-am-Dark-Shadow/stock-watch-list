@@ -55,7 +55,6 @@ const FilterDrawer = ({
       ></div>
       <aside
         className={`fixed right-0 top-0 z-50 h-full w-full max-w-[280px] overflow-y-auto border-l border-white/10 bg-[#0c1326] shadow-2xl shadow-black/50 transition-transform transform ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
-        role="dialog"
         aria-modal="true"
         aria-labelledby="drawerTitle"
       >

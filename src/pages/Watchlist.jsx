@@ -107,7 +107,7 @@ const Watchlist = () => {
       <header className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-white/10 bg-[#0d1428]/80 p-3 backdrop-blur">
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 shadow-inner cursor-pointer">
-            <img src="./logo.webp" alt="Logo" />
+            <img src="./logo.webp" alt="Logo" width="full" height="full" />
           </div>
           <div className="flex flex-col cursor-pointer">
             <img src="./logoname.webp" alt="Logo Name"

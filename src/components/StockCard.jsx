@@ -104,6 +104,7 @@ const StockCard = ({ stock, onCardClick, showFuturesFirst = true, isCompactView,
           ref={buttonElement}
           onClick={toggleMenu}
           className="p-1 rounded-full hover:bg-gray-700 transition-colors"
+          aria-label="More options"
         >
           <MoreHorizontal size={16} />
         </button>
