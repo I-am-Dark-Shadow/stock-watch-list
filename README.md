@@ -40,7 +40,7 @@ Navigate to your project directory and run:
 npm install
 ```
 
-!![Install Dependencies Screenshot](screenshots/npmIimage.png)
+![Install Dependencies Screenshot](screenshots/npmIimage.png)
 
 ### 2. Start the Development Server
 
