@@ -2,30 +2,30 @@
 
 ### Welcome to the **Stock Watch List Lite** project! This is a simple tool designed to help you track and monitor stock market data.
 
-- **Developed by:  [Suvrodip Chakroborty](https://suvrodip-chakroborty.vercel.app/)🌐**
+**Developed by:  [Suvrodip Chakroborty](https://suvrodip-chakroborty.vercel.app/)🌐**
 
 ---
 <br>
 
 # Tech Stack
 
-- **Frontend:** React.js (Vite)
+- **Frontend:** `React.js (Vite)`
 
-- **Styling:** TailwindCSS
+- **Styling:** `TailwindCSS`
 
-- **Charting:** Chart.js, react-chartjs-2, chartjs-adapter-date-fns
+- **Charting:** `Chart.js`, `react-chartjs-2`, `chartjs-adapter-date-fns`
 
-- **Icons:** Lucide React
+- **Icons:** `Lucide React`
 
-- **Notifications:** react-hot-toast
+- **Notifications:** `react-hot-toast`
 
-- **State Management:** React Hooks (useState, useEffect, useRef)
+- **State Management:** `React Hooks` (`useState`, `useEffect`, `useRef`)
 
-- **Testing:** Jest
+- **Testing:** `Jest`
 
-- **Deployment:** Vercel
+- **Deployment:** `Vercel`
 
-<br><br>
+<br>
 
 
 # How to Run the Project
@@ -73,7 +73,7 @@ npm run test
      width="500" 
      style="border: 3px solid #8DCF29; border-radius: 10px; box-shadow: 0px 0px 10px 8px rgba(141,207,41,0.4); padding: 10px;" />
 
-<br><br>
+<br>
 
 # Clarifying Questions & Assumptions
 
@@ -87,7 +87,7 @@ npm run test
 
   **5. Do you want `animations` when `toggling` between `View A` and `View B`?**
 
-<br><br>
+<br>
 
 # Implemented Features
 
@@ -103,7 +103,7 @@ npm run test
 - **`Retry` option if an `error occurs`**
 - **`Unit tests` for main functionalities**
 
-<br><br>
+<br>
 
 # Tradeoffs and Next Steps
 
@@ -115,7 +115,7 @@ npm run test
 
 - **Adding real `API` integration would make the app more `useful`**
 
-<br><br>
+<br>
 
 # Originality & Problem-solving
 
@@ -131,7 +131,7 @@ In this project, I `carefully thought` about how users would interact with a `st
 
     ### These steps helped me solve challenges like handling missing data, improving responsiveness, and making the app user-friendly.
 
-<br><br>
+<br>
 
 
 # 🌐 Deployment
@@ -139,7 +139,7 @@ In this project, I `carefully thought` about how users would interact with a `st
 **This project is deployed on Vercel. You can view the live project here:**  
 ### [Stock Watch List Lite](https://stock-watch-list.vercel.app/)🌐
 
-<br><br>
+<br>
 
 # Notes
 
@@ -147,7 +147,7 @@ In this project, I `carefully thought` about how users would interact with a `st
 -  **Designed as a `Lite version`, expandable to a full-featured `stock watch app`.**
 
 
-<br><br><br>
+<br><br>
 # 📸 Screenshots
 
 # Desktop and Laptop View
