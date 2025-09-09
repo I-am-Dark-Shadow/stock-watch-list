@@ -182,16 +182,16 @@ In this project, I `carefully thought` about how users would interact with a `st
 
 | `Home Page View` | `Error Fetch View` | `Grid View` |
 |---|---|---|
-| ![Home Page View](screenshots/mobile/HomePage.png) |![Error Fetch View](screenshots/mobile/ErrorFetch.png) |![Grid View](screenshots/mobile/GridView.png) |
+| ![Home Page View](screenshots/mobile/mobileHome.jpg) |![Error Fetch View](screenshots/mobile/mobileDataFetch.jpg) |![Grid View](screenshots/mobile/mobileGridView.jpg) |
 | `List View` | `Search View` | `Search Not Found View` |
 |---|---|---|
-| ![List View](screenshots/mobile/ListView.png) |![Search View](screenshots/mobile/Search.png) |![Search Not Found View](screenshots/mobile/SearchNotFound.png) |
+| ![List View](screenshots/mobile/mobilelistView.jpg) |![Search View](screenshots/mobile/mobileSearch.jpg) |![Search Not Found View](screenshots/mobile/mobileSearchNotFound.jpg) |
 
 | `Details Drawer View` | `Missing Data Drawer View` | `Filter Drawer View` |
 |---|---|---|
-| ![Details Drawer View](screenshots/mobile/DetailsDrawer.png) |![Missing Data Drawer View](screenshots/mobile/MissingDataDrawer.png) |![Filter Drawer View](screenshots/mobile/FilterDrawer.png) |
+| ![Details Drawer View](screenshots/mobile/mobileDetailed.jpg) |![Missing Data Drawer View](screenshots/mobile/mobileMissing.jpg) |![Filter Drawer View](screenshots/mobile/mobileFilter.jpg) |
 
 | `Card Toggle View` | `Card Skeleton View` |   |
 |---|---|---|
-| ![Card Toggle View](screenshots/mobile/CardToggle.png) |![Card Skeleton View](screenshots/mobile/CardSkeleton.png) |   |
+| ![Card Toggle View](screenshots/mobile/mobileCardToggle.jpg) |![Card Skeleton View](screenshots/mobile/mobileSkeletonCard.jpg) |   |
 
