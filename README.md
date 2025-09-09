@@ -150,86 +150,48 @@ In this project, I `carefully thought` about how users would interact with a `st
 # Desktop and Laptop View
 
  - ### `Home Page View `                               
-     ![Home Page View](screenshots/desktop/HomePage.png) 
+     ![Home Page View](screenshots/desktop) 
  - ### `Error Fetch View`                  
-     <img src="screenshots/desktop/ErrorFetch.png" 
-     alt="npm test Screenshot" 
-     width="90%" 
-     style="border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0px 0px 10px 8px rgba(24, 201,242,0.4); padding: 10px;" />
+     ![Error Fetch View](screenshots/desktop)
  
-
  - ### `Grid View` 
-     <img src="screenshots/desktop/GridView.png" 
-     alt="npm test Screenshot" 
-     width="90%" 
-     style="border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0px 0px 10px 8px rgba(24, 201,242,0.4); padding: 10px;" />                               
+     ![Grid View](screenshots/desktop)                               
  - ### `List View ` 
-     <img src="screenshots/desktop/ListView.png" 
-     alt="npm test Screenshot" 
-     width="90%" 
-     style="border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0px 0px 10px 8px rgba(24, 201,242,0.4); padding: 10px;" />                       
+     ![List View](screenshots/desktop)                       
   
- 
-
  - ### `Search View `
-     <img src="screenshots/desktop/Search.png" 
-     alt="npm test Screenshot" 
-     width="90%" 
-     style="border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0px 0px 10px 8px rgba(24, 201,242,0.4); padding: 10px;" />                             
+     ![Search View](screenshots/desktop)                             
  - ### `Search Not Found View`  
-     <img src="screenshots/desktop/SearchNotFound.png" 
-     alt="npm test Screenshot" 
-     width="90%" 
-     style="border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0px 0px 10px 8px rgba(24, 201,242,0.4); padding: 10px;" />            
+     ![Search Not Found View](screenshots/desktop)           
   
- 
-
  - ### `Details Drawer View` 
-     <img src="screenshots/desktop/DetailsDrawer.png" 
-     alt="npm test Screenshot" 
-     width="90%" 
-     style="border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0px 0px 10px 8px rgba(24, 201,242,0.4); padding: 10px;" />                     
+     ![Details Drawer View](screenshots/desktop)                     
  - ### `Missing Data Drawer View` 
-     <img src="screenshots/desktop/ErrorData.png" 
-     alt="npm test Screenshot" 
-     width="90%" 
-     style="border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0px 0px 10px 8px rgba(24, 201,242,0.4); padding: 10px;" />         
-  
- 
+     ![Missing Data Drawer View](screenshots/desktop)        
 
  - ### `Filter Drawer View ` 
-     <img src="screenshots/desktop/FilterDrawer.png" 
-     alt="npm test Screenshot" 
-     width="90%" 
-     style="border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0px 0px 10px 8px rgba(24, 201,242,0.4); padding: 10px;" />                     
+     ![Filter Drawer View](screenshots/desktop)                     
  - ### `Card Toggle View ` 
-     <img src="screenshots/desktop/CardToggle.png" 
-     alt="npm test Screenshot" 
-     width="90%" 
-     style="border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0px 0px 10px 8px rgba(24, 201,242,0.4); padding: 10px;" />    
+     ![Card Toggle View](screenshots/desktop)    
  - ### `Card Skeleton View`
-    <img src="screenshots/desktop/SkeletonCard.png" 
-     alt="npm test Screenshot" 
-     width="90%" 
-     style="border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0px 0px 10px 8px rgba(24, 201,242,0.4); padding: 10px;" />            
+    ![Card Skeleton View](screenshots/desktop)            
   
  <br><br>
 
 # 📱 Mobile Responsive View
 
-| ### `Home Page View` | ### `Error Fetch View` | ### `Grid View` |
+| `Home Page View` | `Error Fetch View` | `Grid View` |
 |---|---|---|
-| <img src="screenshots/mobile/mobileHome.jpg" alt="Home Page Screenshot" width="250" height="450" style="margin: 10px; border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0 0 10px 8px rgba(24,201,242,0.4); padding: 10px;" /> | <img src="screenshots/mobile/mobileDataFetch.jpg" alt="Error Fetch Screenshot" width="250" height="450" style="margin: 10px; border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0 0 10px 8px rgba(24,201,242,0.4); padding: 10px;" /> | <img src="screenshots/mobile/mobileGridView.jpg" alt="Grid View Screenshot" width="250" height="450" style="margin: 10px; border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0 0 10px 8px rgba(24,201,242,0.4); padding: 10px;" /> |
+| ![Home Page View](screenshots/mobile/HomePage.png) |![Error Fetch View](screenshots/mobile/ErrorFetch.png) |![Grid View](screenshots/mobile/GridView.png) |
+| `List View` | `Search View` | `Search Not Found View` |
+|---|---|---|
+| ![List View](screenshots/mobile/ListView.png) |![Search View](screenshots/mobile/Search.png) |![Search Not Found View](screenshots/mobile/SearchNotFound.png) |
 
-| ### `List View` | ### `Search View` | ### `Search Not Found View` |
+| `Details Drawer View` | `Missing Data Drawer View` | `Filter Drawer View` |
 |---|---|---|
-| <img src="screenshots/mobile/mobilelistView.jpg" alt="List View Screenshot" width="250" height="450" style="margin: 10px; border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0 0 10px 8px rgba(24,201,242,0.4); padding: 10px;" /> | <img src="screenshots/mobile/mobileSearch.jpg" alt="Search Screenshot" width="250" height="450" style="margin: 10px; border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0 0 10px 8px rgba(24,201,242,0.4); padding: 10px;" /> | <img src="screenshots/mobile/mobileSearchNotFound.jpg" alt="Search Not Found Screenshot" width="250" height="450" style="margin: 10px; border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0 0 10px 8px rgba(24,201,242,0.4); padding: 10px;" /> |
+| ![Details Drawer View](screenshots/mobile/DetailsDrawer.png) |![Missing Data Drawer View](screenshots/mobile/MissingDataDrawer.png) |![Filter Drawer View](screenshots/mobile/FilterDrawer.png) |
 
-| ### `Details Drawer View` | ### `Missing Data Drawer View` | ### `Filter Drawer View` |
+| `Card Toggle View` | `Card Skeleton View` |   |
 |---|---|---|
-| <img src="screenshots/mobile/mobileDetailed.jpg" alt="Details Drawer Screenshot" width="250" height="450" style="margin: 10px; border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0 0 10px 8px rgba(24,201,242,0.4); padding: 10px;" /> | <img src="screenshots/mobile/mobileMissing.jpg" alt="Missing Data Screenshot" width="250" height="450" style="margin: 10px; border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0 0 10px 8px rgba(24,201,242,0.4); padding: 10px;" /> | <img src="screenshots/mobile/mobileFilter.jpg" alt="Filter Drawer Screenshot" width="250" height="450" style="margin: 10px; border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0 0 10px 8px rgba(24,201,242,0.4); padding: 10px;" /> |
-
-| ### `Card Toggle View` | ### `Card Skeleton View` |   |
-|---|---|---|
-| <img src="screenshots/mobile/mobileCardToggle.jpg" alt="Card Toggle Screenshot" width="250" height="450" style="margin: 10px; border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0 0 10px 8px rgba(24,201,242,0.4); padding: 10px;" /> | <img src="screenshots/mobile/mobileSkeletonCard.jpg" alt="Card Skeleton Screenshot" width="250" height="450" style="margin: 10px; border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0 0 10px 8px rgba(24,201,242,0.4); padding: 10px;" /> |   |
+| ![Card Toggle View](screenshots/mobile/CardToggle.png) |![Card Skeleton View](screenshots/mobile/CardSkeleton.png) |   |
 
