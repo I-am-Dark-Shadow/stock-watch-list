@@ -3,7 +3,7 @@
 ### Welcome to the **Stock Watch List Lite** project! This is a simple tool designed to help you track and monitor stock market data.
 
 ---
-<br><br>
+<br>
 
 # Tech Stack
 
@@ -75,43 +75,43 @@ npm run test
 
 # Clarifying Questions & Assumptions
 
- ### 1. Should the data be completely static or should we simulate `random updates` every few seconds?
+  **1. Should the data be completely static or should we simulate `random updates` every few seconds?**
 
- ### 2. Do we need to support multiple themes like `dark mode` and `light mode`?
+  **2. Do we need to support multiple themes like `dark mode` and `light mode`?**
 
- ### 3. Should the `chart` in the details drawer be interactive or just a `static view`?
+  **3. Should the `chart` in the details drawer be interactive or just a `static view`?**
 
- ### 4. Is it okay to use `libraries` like `Chart.js` for the chart, or should we build it from scratch?
+  **4. Is it okay to use `libraries` like `Chart.js` for the chart, or should we build it from scratch?**
 
- ### 5. Do you want `animations` when `toggling` between `View A` and `View B`?
+  **5. Do you want `animations` when `toggling` between `View A` and `View B`?**
 
 <br><br>
 
 # Implemented Features
 
-- ### Display `6 stock cards` per row on desktop and wrap on smaller screens
-- ### Show stock details like `Trading Symbol`, `Capital Market Price`, `Futures Price`, `Percentage Change`, and `last updated time`
-- ### `Toggle` between two views for `price comparison`
-- ### `Search bar` to filter by Trading Symbol
-- ### `Sort` options by `percentage change`, `capital market price`, and `futures price`
-- ### Open `details drawer` with a `dummy chart`using `random` data and stock information
-- ### Show `error state` when data is `missing`
-- ### `Refresh` button to `reload data`
-- ### Show `loading skeletons` when data is being `fetched`
-- ### `Retry` option if an `error occurs`
-- ### `Unit tests` for main functionalities
+- **Display `6 stock cards` per row on desktop and wrap on smaller screens**
+- **Show stock details like `Trading Symbol`, `Capital Market Price`, `Futures Price`, `Percentage Change`, and `last updated time`**
+- **`Toggle` between two views for `price comparison`**
+- **`Search bar` to filter by Trading Symbol**
+- **`Sort` options by `percentage change`, `capital market price`, and `futures price`**
+- **Open `details drawer` with a `dummy chart`using `random` data and stock information**
+- **Show `error state` when data is `missing`**
+- **`Refresh` button to `reload data`**
+- **Show `loading skeletons` when data is being `fetched`**
+- **`Retry` option if an `error occurs`**
+- **`Unit tests` for main functionalities**
 
 <br><br>
 
 # Tradeoffs and Next Steps
 
-- ### The chart uses `random data` instead of real market data
+- **The chart uses `random data` instead of real market data**
 
-- ### `Error simulation` is random and may not cover all possible edge cases
+- **`Error simulation` is random and may not cover all possible edge cases**
 
-- ### The UI could be improved with more `animations` and `transitions`
+- **The UI could be improved with more `animations` and `transitions`**
 
-- ### Adding real `API` integration would make the app more `useful`
+- **Adding real `API` integration would make the app more `useful`**
 
 <br><br>
 
@@ -121,27 +121,27 @@ In this project, I `carefully thought` about how users would interact with a `st
 
 - ## Some problem-solving steps I took:
 
-    - ### I used dummy data and simulated data fetching using `setTimeout` to create a real-like experience without using an `API`.
-    - ### I implemented `error handling`, so if the data is missing or a fetch fails, the app shows a `user-friendly message` instead of crashing.
-    - ### I structured the code with reusable components like `StockCard`, `ErrorState`, and `FilterDrawer`, `More` so it is clean and easy to manage.
-    - ### I wrote `unit tests` using `Jest` and React `Testing Library` to check that the main functionalities work as expected.
-    - ### I used `styling`, and `transitions` to make the interface smooth and intuitive.
+    - **I used dummy data and simulated data fetching using `setTimeout` to create a real-like experience without using an `API`.**
+    - **I implemented `error handling`, so if the data is missing or a fetch fails, the app shows a `user-friendly message` instead of crashing.**
+    - **I structured the code with reusable components like `StockCard`, `ErrorState`, and `FilterDrawer`, `More` so it is clean and easy to manage.**
+    - **I wrote `unit tests` using `Jest` and React `Testing Library` to check that the main functionalities work as expected.**
+    - **I used `styling`, and `transitions` to make the interface smooth and intuitive.**
 
-    ## These steps helped me solve challenges like handling missing data, improving responsiveness, and making the app user-friendly.
+    ### These steps helped me solve challenges like handling missing data, improving responsiveness, and making the app user-friendly.
 
 <br><br>
 
 
 # 🌐 Deployment
 
-### This project is deployed on Vercel. You can view the live project here:  
-## [Stock Watch List Lite](https://stock-watch-list.vercel.app/)🌐
+**This project is deployed on Vercel. You can view the live project here:**  
+### [Stock Watch List Lite](https://stock-watch-list.vercel.app/)🌐
 
 <br><br>
 
 # Notes
 
--  Beginner-friendly and perfect for understanding `React`, `Tailwind CSS`, and basic `stock tracking` applications.
+-  **Beginner-friendly and perfect for understanding `React`, `Tailwind CSS`, and basic `stock tracking` applications.**
 -  **Designed as a `Lite version`, expandable to a full-featured `stock watch app`.**
 
 
@@ -187,7 +187,7 @@ In this project, I `carefully thought` about how users would interact with a `st
 | `List View` | `Search View` | `Search Not Found View` |
 
 | ![List View](screenshots/mobile/mobilelistView.jpg) |![Search View](screenshots/mobile/mobileSearch.jpg) |![Search Not Found View](screenshots/mobile/mobileSearchNotFound.jpg) |
-|   |   |   |
+|---|---|---|
 | `Details Drawer View` | `Missing Data Drawer View` | `Filter Drawer View` |
 |---|---|---|
 | ![Details Drawer View](screenshots/mobile/mobileDetailed.jpg) |![Missing Data Drawer View](screenshots/mobile/mobileMissing.jpg) |![Filter Drawer View](screenshots/mobile/mobileFilter.jpg) |
