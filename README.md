@@ -181,7 +181,7 @@ In this project, I `carefully thought` about how users would interact with a `st
 
 # 📱 Mobile Responsive View
 
-| `Home Page View` | `Error Fetch View` | `Grid View` |
+|`Home Page View` |`Error Fetch View` |`Grid View` |
 |---|---|---|
 | ![Home Page View](screenshots/mobile/mobileHome.jpg) |![Error Fetch View](screenshots/mobile/mobileDataFetch.jpg) |![Grid View](screenshots/mobile/mobileGridView.jpg) |
 | `List View` | `Search View` | `Search Not Found View` |
