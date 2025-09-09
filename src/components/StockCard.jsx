@@ -120,7 +120,7 @@ const StockCard = ({ stock, onCardClick, showFuturesFirst = true, isCompactView,
           <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             <button
               onClick={(e) => handleViewSelect(e, 'capital')}
-              className=" w-full text-left px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 lg:flex block justify-between items-center"
+              className=" w-full text-left px-4 py-2 lg:text-sm text-xs text-gray-200 hover:bg-gray-600 lg:flex block justify-between items-center"
               role="menuitem"
             >
               Capital – Futures
@@ -130,7 +130,7 @@ const StockCard = ({ stock, onCardClick, showFuturesFirst = true, isCompactView,
             </button>
             <button
               onClick={(e) => handleViewSelect(e, 'futures')}
-              className=" w-full text-left px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 lg:flex block justify-between items-center"
+              className=" w-full text-left px-4 py-2 lg:text-sm text-xs text-gray-200 hover:bg-gray-600 lg:flex block justify-between items-center"
               role="menuitem"
             >
               Futures – Capital
