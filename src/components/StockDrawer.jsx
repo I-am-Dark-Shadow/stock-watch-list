@@ -183,9 +183,9 @@ const StockDrawer = ({ stock, isOpen, onClose, }) => {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <button className="rounded-lg border border-white/10 bg-white/5 p-2 transition hover:border-yellow-400/40 hover:bg-yellow-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/30" aria-pressed="false" aria-label="Toggle favorite">
+            {/* <button className="rounded-lg border border-white/10 bg-white/5 p-2 transition hover:border-yellow-400/40 hover:bg-yellow-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/30" aria-pressed="false" aria-label="Toggle favorite">
               <Star className="h-4 w-4 text-slate-300" />
-            </button>
+            </button> */}
             <button onClick={onClose} className="rounded-lg border border-white/10 bg-white/5 p-2 transition hover:border-rose-400/40 hover:bg-rose-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400/30" aria-label="Close panel">
               <X className="h-4 w-4 text-slate-300" />
             </button>

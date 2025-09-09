@@ -16,7 +16,7 @@ const getInitialColor = (symbol) => {
   return colors[symbol.charAt(0).toUpperCase()] || 'bg-slate-500';
 };
 
-const StockCard = ({ stock, onCardClick, showFuturesFirst = true, isCompactView, activeSort, isSortMenuOpen }) => {
+const StockCard = ({ stock, onCardClick, showFuturesFirst = true, isCompactView, activeSort }) => {
   const [showFutures, setShowFutures] = useState(showFuturesFirst);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const lastUpdatedText = useRelativeTime(stock.lastUpdatedTimestamp);
@@ -84,8 +84,8 @@ const StockCard = ({ stock, onCardClick, showFuturesFirst = true, isCompactView,
   }, []);
 
   const cardClasses = isCompactView
-    ? `bg-[#181D31] text-white p-4 rounded-xl shadow-lg border border-gray-700 w-full cursor-pointer transition-all duration-300 transform hover:shadow-cyan-500/50 hover:shadow-2xl relative ${isSortMenuOpen ? '-z-50' : 'z-50'}`
-    : `bg-[#181D31] text-white p-4 rounded-xl shadow-lg border border-gray-700 w-full cursor-pointer transition-all duration-300 transform hover:scale-105 hover:shadow-cyan-500/50 hover:shadow-2xl relative ${isSortMenuOpen ? '-z-50' : 'z-50'}`;
+    ? `bg-[#181D31] text-white p-4 rounded-xl shadow-lg border border-gray-700 w-full cursor-pointer transition-all duration-300 transform hover:shadow-cyan-500/50 hover:shadow-2xl relative`
+    : `bg-[#181D31] text-white p-4 rounded-xl shadow-lg border border-gray-700 w-full cursor-pointer transition-all duration-300 transform hover:scale-105 hover:shadow-cyan-500/50 hover:shadow-2xl relative`;
 
   return (
     <div
@@ -98,7 +98,9 @@ const StockCard = ({ stock, onCardClick, showFuturesFirst = true, isCompactView,
           <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-md font-bold ${getInitialColor(stock.tradingSymbol)}`}>
             {stock.tradingSymbol.charAt(0)}
           </div>
-          <h2 className="text-sm font-semibold">{stock.tradingSymbol}</h2>
+          <h2 className="text-sm font-semibold">
+            {window.innerWidth <= 640 ? stock.tradingSymbol.slice(0, 5) : stock.tradingSymbol}
+          </h2>
         </div>
         <button
           ref={buttonRef}
@@ -109,30 +111,30 @@ const StockCard = ({ stock, onCardClick, showFuturesFirst = true, isCompactView,
         </button>
       </div>
 
-      {/* Dropdown Menu */}
+      {/* Responsive Dropdown Menu */}
       {isMenuOpen && (
         <div
           ref={menuRef}
-          className="absolute right-3 top-13 z-50 w-52 rounded-md bg-[#2d3748] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          className="absolute right-2 top-13 z-50 lg:w-fit w-[137px] rounded-md bg-[#2d3748] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:w-52 sm:right-3"
         >
           <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
             <button
               onClick={(e) => handleViewSelect(e, 'capital')}
-              className="block w-full text-left px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 flex justify-between items-center"
+              className=" w-full text-left px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 lg:flex block justify-between items-center"
               role="menuitem"
             >
               Capital – Futures
-              <span className={`ml-2 flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${CMFColor}`}>
+              <span className={` mt-1 lg:mt-0 lg:ml-2 -ml-1 flex items-center gap-1 px-2 py-1 lg:rounded-full rounded w-fit text-xs font-medium ${CMFColor}`}>
                 <span>{`₹ ${CMF.toFixed(2)}`}</span>
               </span>
             </button>
             <button
               onClick={(e) => handleViewSelect(e, 'futures')}
-              className="block w-full text-left px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 flex justify-between items-center"
+              className=" w-full text-left px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 lg:flex block justify-between items-center"
               role="menuitem"
             >
               Futures – Capital
-              <span className={`ml-2 flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${FMCColor}`}>
+              <span className={` mt-1 lg:mt-0 lg:ml-2 -ml-1 flex items-center gap-1 px-2 py-1 lg:rounded-full rounded w-fit text-xs font-medium ${FMCColor}`}>
                 <span>{`₹ ${FMC.toFixed(2)}`}</span>
               </span>
             </button>
@@ -141,18 +143,16 @@ const StockCard = ({ stock, onCardClick, showFuturesFirst = true, isCompactView,
       )}
 
       {/* Price and Change */}
-      <div className="flex justify-between items-center my-3">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center my-3 gap-2 sm:gap-0">
         <span className="text-xl font-bold">₹{formatPrice(price)}</span>
-        <div>
-          <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${changeColor}`}>
-            {changeIcon}
-            <span>{displayValue}</span>
-          </div>
+        <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${changeColor}`}>
+          {changeIcon}
+          <span>{displayValue}</span>
         </div>
       </div>
 
       {/* Price Type and Last Updated */}
-      <div className="flex justify-between text-xs text-gray-400">
+      <div className="flex flex-col sm:flex-row justify-between text-xs text-gray-400">
         <p>{priceType}</p>
         <p>{lastUpdatedText}</p>
       </div>
