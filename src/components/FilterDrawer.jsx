@@ -73,13 +73,13 @@ const FilterDrawer = ({
             <div id="viewToggle" className="flex rounded-lg bg-white/5 ring-1 ring-inset ring-white/10 p-1 w-fit">
               <button
                 onClick={() => handleViewToggle('futures-capital')}
-                className={`px-3 py-3 mr-0.5 text-xs rounded-md transition hover:bg-white/5 focus-visible:outline-none ${showFuturesFirst ? 'bg-green-200/20' : ''}`}
+                className={`px-3 py-3 mr-0.5 lg:text-xs text-[10px] rounded-md transition hover:bg-white/5 focus-visible:outline-none ${showFuturesFirst ? 'bg-green-200/20' : ''}`}
               >
                 Futures – Capital
               </button>
               <button
                 onClick={() => handleViewToggle('capital-futures')}
-                className={`px-3 py-3 ml-0.5 text-xs rounded-md transition hover:bg-white/5 focus-visible:outline-none ${!showFuturesFirst ? 'bg-green-200/20' : ''}`}
+                className={`px-3 py-3 ml-0.5 lg:text-xs text-[10px] rounded-md transition hover:bg-white/5 focus-visible:outline-none ${!showFuturesFirst ? 'bg-green-200/20' : ''}`}
               >
                 Capital – Futures
               </button>
