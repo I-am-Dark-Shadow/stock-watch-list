@@ -137,7 +137,7 @@ In this project, I `carefully thought` about how users would interact with a `st
 # 🌐 Deployment
 
 **This project is deployed on Vercel. You can view the live project here:**  
-### [Stock Watch List Lite](https://stock-watch-list.vercel.app/)🌐
+### Live Link: [Stock Watch List Lite](https://stock-watch-list.vercel.app/)🌐
 
 <br>
 
