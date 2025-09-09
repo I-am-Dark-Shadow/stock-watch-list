@@ -113,6 +113,20 @@ npm run test
 
 - ### Adding real `API` integration would make the app more `useful`
 
+<br><br>
+# Originality & Problem-solving
+
+In this project, I `carefully thought` about how users would interact with a `stock watchlist app`. I built the app with my `own structure` and `logic`.
+
+- ## Some problem-solving steps I took:
+
+    - ### I used dummy data and simulated data fetching using `setTimeout` to create a real-like experience without using an `API`.
+    - ### I implemented `error handling`, so if the data is missing or a fetch fails, the app shows a `user-friendly message` instead of crashing.
+    - ### I structured the code with reusable components like `StockCard`, `ErrorState`, and `FilterDrawer`, `More` so it is clean and easy to manage.
+    - ### I wrote `unit tests` using `Jest` and React `Testing Library` to check that the main functionalities work as expected.
+    - ### I used `styling`, and `transitions` to make the interface smooth and intuitive.
+
+    ## These steps helped me solve challenges like handling missing data, improving responsiveness, and making the app user-friendly.
 
 <br><br>
 
