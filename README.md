@@ -1,6 +1,6 @@
 # Stock Watch List Lite
 
-Welcome to the **Stock Watch List Lite** project! This is a simple tool designed to help you track and monitor stock market data.
+### Welcome to the **Stock Watch List Lite** project! This is a simple tool designed to help you track and monitor stock market data.
 
 ---
 <br><br>
@@ -114,6 +114,7 @@ npm run test
 - ### Adding real `API` integration would make the app more `useful`
 
 <br><br>
+
 # Originality & Problem-solving
 
 In this project, I `carefully thought` about how users would interact with a `stock watchlist app`. I built the app with my `own structure` and `logic`.
@@ -150,31 +151,31 @@ In this project, I `carefully thought` about how users would interact with a `st
 # Desktop and Laptop View
 
  - ### `Home Page View `                               
-     ![Home Page View](screenshots/desktop) 
+     ![Home Page View](screenshots/desktop/HomePage.png) 
  - ### `Error Fetch View`                  
-     ![Error Fetch View](screenshots/desktop)
+     ![Error Fetch View](screenshots/desktop/ErrorFetch.png)
  
  - ### `Grid View` 
-     ![Grid View](screenshots/desktop)                               
+     ![Grid View](screenshots/desktop/GridView.png)                               
  - ### `List View ` 
-     ![List View](screenshots/desktop)                       
+     ![List View](screenshots/desktop/ListView.png)                       
   
  - ### `Search View `
-     ![Search View](screenshots/desktop)                             
+     ![Search View](screenshots/desktop/Search.png)                             
  - ### `Search Not Found View`  
-     ![Search Not Found View](screenshots/desktop)           
+     ![Search Not Found View](screenshots/desktop/SearchNotFound.png)           
   
  - ### `Details Drawer View` 
-     ![Details Drawer View](screenshots/desktop)                     
+     ![Details Drawer View](screenshots/desktop/DetailsDrawer.png)                     
  - ### `Missing Data Drawer View` 
-     ![Missing Data Drawer View](screenshots/desktop)        
+     ![Missing Data Drawer View](screenshots/desktop/ErrorData.png)        
 
  - ### `Filter Drawer View ` 
-     ![Filter Drawer View](screenshots/desktop)                     
+     ![Filter Drawer View](screenshots/desktop/FilterDrawer.png)                     
  - ### `Card Toggle View ` 
-     ![Card Toggle View](screenshots/desktop)    
+     ![Card Toggle View](screenshots/desktop/CardToggle.png)    
  - ### `Card Skeleton View`
-    ![Card Skeleton View](screenshots/desktop)            
+    ![Card Skeleton View](screenshots/desktop/SkeletonCard.png)            
   
  <br><br>
 
@@ -191,7 +192,4 @@ In this project, I `carefully thought` about how users would interact with a `st
 |---|---|---|
 | ![Details Drawer View](screenshots/mobile/mobileDetailed.jpg) |![Missing Data Drawer View](screenshots/mobile/mobileMissing.jpg) |![Filter Drawer View](screenshots/mobile/mobileFilter.jpg) |
 
-| `Card Toggle View` | `Card Skeleton View` |   |
-|---|---|---|
-| ![Card Toggle View](screenshots/mobile/mobileCardToggle.jpg) |![Card Skeleton View](screenshots/mobile/mobileSkeletonCard.jpg) |   |
 
