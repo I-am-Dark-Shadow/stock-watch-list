@@ -131,7 +131,7 @@ const Watchlist = () => {
 
   return (
     <div className="relative z-10 mx-auto flex max-w-full flex-col px-4 pb-24 pt-6 sm:px-4 lg:px-8">
-      <Toaster position="top" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
 
       <header className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-white/10 bg-[#0d1428]/80 p-3 backdrop-blur">
         <div className="flex items-center gap-3">
