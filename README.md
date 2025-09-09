@@ -187,8 +187,9 @@ In this project, I `carefully thought` about how users would interact with a `st
 |---|---|---|
 | ![Home Page View](screenshots/mobile/mobileHome.jpg) |![Error Fetch View](screenshots/mobile/mobileDataFetch.jpg) |![Grid View](screenshots/mobile/mobileGridView.jpg) |
 
-|---|---|---|
+
 | `List View` | `Search View` | `Search Not Found View` |
+|---|---|---|
 | ![List View](screenshots/mobile/mobilelistView.jpg) |![Search View](screenshots/mobile/mobileSearch.jpg) |![Search Not Found View](screenshots/mobile/mobileSearchNotFound.jpg) |
 
 
