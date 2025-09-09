@@ -141,8 +141,8 @@ In this project, I `carefully thought` about how users would interact with a `st
 
 # Notes
 
-- ### Beginner-friendly and perfect for understanding `React`, `Tailwind CSS`, and basic `stock tracking` applications.
-- ### Designed as a `Lite version`, expandable to a full-featured `stock watch app`.
+-  Beginner-friendly and perfect for understanding `React`, `Tailwind CSS`, and basic `stock tracking` applications.
+-  **Designed as a `Lite version`, expandable to a full-featured `stock watch app`.**
 
 
 <br><br><br>
@@ -185,7 +185,7 @@ In this project, I `carefully thought` about how users would interact with a `st
 |---|---|---|
 | ![Home Page View](screenshots/mobile/mobileHome.jpg) |![Error Fetch View](screenshots/mobile/mobileDataFetch.jpg) |![Grid View](screenshots/mobile/mobileGridView.jpg) |
 | `List View` | `Search View` | `Search Not Found View` |
-|---|---|---|
+
 | ![List View](screenshots/mobile/mobilelistView.jpg) |![Search View](screenshots/mobile/mobileSearch.jpg) |![Search Not Found View](screenshots/mobile/mobileSearchNotFound.jpg) |
 
 | `Details Drawer View` | `Missing Data Drawer View` | `Filter Drawer View` |
