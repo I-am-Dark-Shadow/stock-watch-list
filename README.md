@@ -2,7 +2,7 @@
 
 ### Welcome to the **Stock Watch List Lite** project! This is a simple tool designed to help you track and monitor stock market data.
 
-### Developed by [Suvrodip Chakroborty](https://suvrodip-chakroborty.vercel.app/)
+- **Developed by:  [Suvrodip Chakroborty](https://suvrodip-chakroborty.vercel.app/)🌐**
 
 ---
 <br>
