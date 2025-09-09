@@ -107,10 +107,13 @@ const Watchlist = () => {
       <header className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-2xl border border-white/10 bg-[#0d1428]/80 p-3 backdrop-blur">
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 shadow-inner cursor-pointer">
-            <img src="./logo.png" alt="Logo" />
+            <img src="./logo.webp" alt="Logo" />
           </div>
           <div className="flex flex-col cursor-pointer">
-            <img src="./logoname.png" alt="Logo Name" className='w-[200px] lg:w-[250px] ml-[-5px]' />
+            <img src="./logoname.webp" alt="Logo Name"
+              width={200}
+              height={60}
+              className="w-[200px] lg:w-[250px] ml-[-5px]" />
             <p className="text-xs text-slate-400">Track, filter, and explore live market movers</p>
           </div>
         </div>
@@ -168,19 +171,19 @@ const Watchlist = () => {
           <div className={isCompactView ? "flex flex-col gap-2" : "grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3"}>
             {loading
               ? Array.from({ length: ITEMS_PER_PAGE }).map((_, idx) => (
-                  <SkeletonCard key={idx} isCompactView={isCompactView} />
-                ))
+                <SkeletonCard key={idx} isCompactView={isCompactView} />
+              ))
               : currentStocks.length > 0
                 ? currentStocks.map(stock => (
-                    <StockCard
-                      key={stock.id}
-                      stock={stock}
-                      onCardClick={openDrawer}
-                      showFuturesFirst={showFuturesFirst}
-                      isCompactView={isCompactView}
-                      activeSort={activeSort}
-                    />
-                  ))
+                  <StockCard
+                    key={stock.id}
+                    stock={stock}
+                    onCardClick={openDrawer}
+                    showFuturesFirst={showFuturesFirst}
+                    isCompactView={isCompactView}
+                    activeSort={activeSort}
+                  />
+                ))
                 : (
                   <div className="mt-16 flex flex-col items-center justify-center text-center col-span-full">
                     <div className="mb-4 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-inner">
