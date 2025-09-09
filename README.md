@@ -150,10 +150,7 @@ In this project, I `carefully thought` about how users would interact with a `st
 # Desktop and Laptop View
 
  - ### `Home Page View `                               
-     <img src="screenshots/desktop/HomePage.png" 
-     alt="npm test Screenshot" 
-     width="90%" 
-     style="border: 3px solid #18C9F2; border-radius: 10px; box-shadow: 0px 0px 10px 8px rgba(24, 201,242,0.4); padding: 10px;" /> 
+     ![Home Page View](screenshots/desktop/HomePage.png) 
  - ### `Error Fetch View`                  
      <img src="screenshots/desktop/ErrorFetch.png" 
      alt="npm test Screenshot" 
