@@ -1,4 +1,4 @@
-<p align="">
+<p>
   <img src="screenshots/logoreadme.png" alt="LOGO" width="80" height="70" style=" margin-left: -20px;" />
   <img src="screenshots/logonamereadme.png" alt="LOGONAME" height="70" />
 </p>
