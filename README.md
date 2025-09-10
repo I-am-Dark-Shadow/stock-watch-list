@@ -1,4 +1,7 @@
-![LOGO](screenshots/logoreadme.png) ![LOGO](screenshots/logonamereadme.png)
+<p align="">
+  <img src="screenshots/logoreadme.png" alt="LOGO" width="80" height="70" style=" margin-left: -20px;" />
+  <img src="screenshots/logonamereadme.png" alt="LOGONAME" height="70" />
+</p>
 
 ### Welcome to the **Stock Watch List Lite** project! This is a simple tool designed to help you track and monitor stock market data.
 
