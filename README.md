@@ -122,7 +122,7 @@ In this project, I `carefully thought` about how users would interact with a `st
 
 <br>
 
-## Extra Improvements
+# Extra Improvements
 
 ### I checked the project with Lighthouse and made sure it follows the best practices. All important parts like: 
 
