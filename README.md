@@ -122,6 +122,62 @@ In this project, I `carefully thought` about how users would interact with a `st
 
 <br>
 
+## ✅ Extra Improvements
+
+### I checked the project with Lighthouse and made sure it follows the best practices. All important parts like: 
+
+- ### Navigation(Default) Scores: [Navigation Report Pdf 📑](LightHouseReport/Navigation.pdf)
+  - `Performance:` **100**
+  - `Accessibility:` **100**
+  - `Best Practices:` **100**
+  - `SEO:` **100** 
+
+  ![Navigation Scores](LightHouseReport/NavigationDefault.jpg)
+
+- ### Snapshot Scores:  [Snapshot Report Pdf 📑](LightHouseReport/SnapShot.pdf)
+  - `Performance:` **4/4**  
+  - `Accessibility:` **23/23**  
+  - `Best Practices:` **5/5** 
+  - `SEO:` **5/5**  
+
+  ![Snapshot Scores](LightHouseReport/Snapshot.jpg)
+
+
+- ### Timespan Scores:  [Timespan Report Pdf 📑](LightHouseReport/TimeStamp-Report.pdf)
+  - `Performance:` **11/11**  
+  - `Best Practices:` **8/8**  
+
+  ![Timespan Scores](LightHouseReport/Timespan.jpg)
+
+### This means the app loads fast, works well on all devices, is easy to use by everyone, and is ready for search engines. These improvements show that I care about making a good and professional project.
+
+<br>
+
+# What I fixed to get 100%
+
+- ## Here are the things I improved to make the app better and get 100% in all important parts like `Performance`, `Accessibility`, Best `Practices`, and `SEO`:### 
+
+  - **✔️ Optimized images by `resizing` them and using next-gen formats like `WebP`**
+
+  - **✔️ Used responsive images with right `size` loads on `different screens`**
+
+  - **✔️ Added `width` and `height` to images to prevent layout shift and make `loading faster`**
+
+  - **✔️ Made sure important images like the `logo` are not `lazy loaded` for better performance**
+
+  - **✔️ Fixed the wrong `HTML tags`**
+
+  - **✔️ Added a `meta description` to help search engines `understand the Webpage`**
+
+  - **✔️ Checked Lighthouse `scores` and `fixed` all `issues` they showed**
+
+  - **✔️ Made the `navigation` `smooth` and followed best `practices` for `faster loading` and `better experien`**
+
+  ## These changes helped the app to be fast, user-friendly, and professional.
+
+
+<br>
+
 # 🌐 Deployment
 
 **This project is deployed on Vercel. You can view the live project here:**
