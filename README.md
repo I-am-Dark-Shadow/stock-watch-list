@@ -147,7 +147,7 @@ In this project, I `carefully thought` about how users would interact with a `st
   - `Performance:` **11/11**  
   - `Best Practices:` **8/8**  
 
-  ![Timespan Scores](LightHouseReport/Timespan.jpg)
+  ![Timespan Scores](LightHouseReport/TimeSpan.jpg)
 
 ### This means the app loads fast, works well on all devices, is easy to use by everyone, and is ready for search engines. These improvements show that I care about making a good and professional project.
 
