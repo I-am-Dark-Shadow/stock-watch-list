@@ -113,7 +113,7 @@ const Watchlist = () => {
             <img src="./logoname.webp" alt="Logo Name"
               width={200}
               height={60}
-              loading="lazy"
+              loading="eager"
               className="w-[200px] lg:w-[250px] ml-[-5px]" />
             <p className="text-xs text-slate-400">Track, filter, and explore live market movers</p>
           </div>
