@@ -155,7 +155,7 @@ In this project, I `carefully thought` about how users would interact with a `st
 
 # What I fixed to get 100%
 
-- ## Here are the things I improved to make the app better and get 100% in all important parts like `Performance`, `Accessibility`, Best `Practices`, and `SEO`:### 
+- ## Here are the things I improved to make the app better and get 100% in all important parts like `Performance`, `Accessibility`, Best `Practices`, and `SEO`:
 
   - **✔️ Optimized images by `resizing` them and using next-gen formats like `WebP`**
 
