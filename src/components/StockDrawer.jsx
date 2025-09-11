@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { X, Star, TrendingUp, TrendingDown, BookX } from 'lucide-react';
+import { X, TrendingUp, TrendingDown, BookX } from 'lucide-react';
 import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import { formatPrice, formatPercentage } from '../utils/formatters';
 import useRelativeTime from '../hooks/useRelativeTime';
 
@@ -9,236 +18,228 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 const StockDrawer = ({ stock, isOpen, onClose }) => {
   const [chartData, setChartData] = useState([]);
-  const updatedText = useRelativeTime(stock?.lastUpdatedTimestamp);
+  const [timeframe, setTimeframe] = useState('day'); // day or month
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [range, setRange] = useState([1, 30]); // default 1-30 days
+  const [startInput, setStartInput] = useState('1');
+  const [endInput, setEndInput] = useState('30');
 
+  const lastUpdated = useRelativeTime(stock?.lastUpdatedTimestamp);
+
+  // generate random chart data
   useEffect(() => {
-    if (stock && stock.capitalMarketLastTradedPrice != null) {
-      const createChartData = (base) => {
-        const arr = [];
-        for (let i = 0; i < 30; i++) {
-          const prev = i > 0 ? arr[i - 1] : base;
-          const next = prev + (Math.random() - 0.48) * 1.6;
-          arr.push(parseFloat(next.toFixed(2)));
-        }
-        return arr;
-      };
-      setChartData(createChartData(stock.capitalMarketLastTradedPrice));
-    }
-  }, [stock]);
+    if (!stock || stock.capitalMarketLastTradedPrice == null) return;
 
-  const hasError =
-    !stock ||
-    stock.capitalMarketLastTradedPrice == null ||
-    stock.futuresLastTradedPrice == null ||
-    !stock.tradingSymbol;
+    const dataLength = timeframe === 'day' ? 30 : 12;
+    const basePrice = stock.capitalMarketLastTradedPrice;
+    const newData = [];
+    let prev = basePrice;
+
+    for (let i = 0; i < dataLength; i++) {
+      const next = prev + (Math.random() - 0.48) * 1.6;
+      newData.push(parseFloat(next.toFixed(2)));
+      prev = next;
+    }
+
+    setChartData(newData);
+    setRange([1, dataLength]);
+    setStartInput('1');
+    setEndInput(`${dataLength}`);
+  }, [stock, timeframe]);
 
   if (!isOpen) return null;
 
-  if (hasError) {
-    const errorFields = [];
-    if (!stock) {
-      errorFields.push("Stock data missing entirely.");
-    } else {
-      if (stock.capitalMarketLastTradedPrice == null) errorFields.push("Missing Capital Market Price.");
-      if (stock.futuresLastTradedPrice == null) errorFields.push("Missing Futures Price.");
-      if (!stock.tradingSymbol) errorFields.push("Missing Trading Symbol.");
-    }
-
+  // show error if data missing
+  if (!stock || stock.capitalMarketLastTradedPrice == null || stock.futuresLastTradedPrice == null) {
     return (
       <>
+        {/* Overlay */}
         <div
-          className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity ${
-            isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-          }`}
+          className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+            }`}
           onClick={onClose}
           aria-hidden="true"
         ></div>
+
+        {/* Drawer */}
         <div
-          className={`fixed right-0 top-0 z-50 h-full w-full max-w-xl overflow-y-auto border-l border-white/10 bg-[#0c1326] shadow-2xl shadow-black/50 transition-transform lg:max-w-3xl transform ${
-            isOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
+          className={`fixed right-0 top-0 z-50 h-full w-full max-w-xl overflow-y-auto border-l border-white/10 bg-[#0c1326] shadow-2xl shadow-black/50 transition-transform lg:max-w-3xl transform ${isOpen ? 'translate-x-0' : 'translate-x-full'
+            }`}
           role="dialog"
           aria-modal="true"
           aria-labelledby="drawerTitle"
         >
-          <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 ring-1 ring-white/10">
-                <span id="drawerSymbol" className="text-sm font-semibold tracking-tight text-cyan-300">
-                  {stock && stock.tradingSymbol ? stock.tradingSymbol.charAt(0) : "?"}
-                </span>
-              </div>
-              <div className="flex flex-col">
-                <h3 id="drawerTitle" className="text-[20px] tracking-tight font-semibold text-white">
-                  {stock && stock.tradingSymbol ? stock.tradingSymbol : "Unknown Stock"}
-                </h3>
-                <p className="text-xs text-slate-400">Details</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <button onClick={onClose} className="rounded-lg border border-white/10 bg-white/5 p-2 transition hover:border-rose-400/40 hover:bg-rose-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400/30" aria-label="Close panel">
-                <X className="h-4 w-4 text-slate-300" />
-              </button>
-            </div>
+          <div className="flex justify-end p-5 border-b border-white/10">
+            <button
+              onClick={onClose}
+              className="rounded-lg border border-white/10 bg-white/5 p-2 hover:border-rose-400/40 hover:bg-rose-400/10 focus:outline-none focus:ring-2 focus:ring-rose-400/30"
+            >
+              <X className="h-4 w-4 text-slate-300" />
+            </button>
           </div>
-          <div className="mt-16 flex flex-col items-center justify-center text-center p-6">
-            <div className="mb-4 rounded-2xl border border-white/10 bg-white/5 p-6 shadow-inner">
-              <BookX className="h-8 w-8 text-rose-400" />
-            </div>
-            <h2 className="text-[25px] tracking-tight font-semibold text-white">Data Missing!</h2>
-            <p className="mt-1 max-w-sm text-lg text-slate-400">
-              Some important details are missing for this stock:
-            </p>
-            <ul className="list-disc list-inside text-sm text-slate-400 mt-2 text-left">
-              {errorFields.map((field, index) => (
-                <li key={index}>{field}</li>
-              ))}
+
+          <div className="text-center mt-20 p-6">
+            <BookX className="mx-auto text-rose-400" size={40} />
+            <h2 className="text-white text-2xl mt-4">Data Missing!</h2>
+            <p className="text-slate-400 mt-2">Some important details are missing.</p>
+            <ul className="text-slate-400 mt-2 list-disc list-inside">
+              {!stock && <li>Stock data not available</li>}
+              {stock?.capitalMarketLastTradedPrice == null && <li>Capital Market Price missing</li>}
+              {stock?.futuresLastTradedPrice == null && <li>Futures Price missing</li>}
             </ul>
           </div>
         </div>
       </>
+
     );
   }
 
+  // trend
   const isPositive = stock.percentageChange >= 0;
-  const pillStyle = isPositive ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300' : 'bg-rose-500/10 border-rose-500/30 text-rose-300';
+  const trendColor = isPositive ? 'emerald' : 'rose';
   const trendIcon = isPositive ? <TrendingUp size={16} /> : <TrendingDown size={16} />;
 
-  const data = {
-    labels: Array.from({ length: 30 }).map((_, i) => i + 1),
+  // chart labels
+  const totalLabels = timeframe === 'day' ? 30 : 12;
+  const labelsAll = Array.from({ length: totalLabels }, (_, i) => timeframe === 'day' ? `D${i + 1}` : `M${i + 1}`);
+  const labels = labelsAll.slice(range[0] - 1, range[1]);
+  const dataSlice = chartData.slice(range[0] - 1, range[1]);
+
+  const chartConfig = {
+    labels,
     datasets: [
       {
-        data: chartData,
+        data: dataSlice,
         borderColor: '#22d3ee',
-        borderWidth: 1.8,
-        tension: 0.35,
-        pointRadius: 0,
-        fill: false,
+        borderWidth: 2,
+        tension: 0, // straight line
+        pointRadius: 2,
+        pointHoverRadius: 4,
+        segment: {
+          borderColor: (ctx) => {
+            const i = ctx.p0DataIndex;
+            if (i === null || i + 1 >= dataSlice.length) return '#22d3ee';
+            return dataSlice[i + 1] > dataSlice[i] ? '#22c55e' : '#ef4444';
+          },
+        },
       },
     ],
   };
 
-  const options = {
+  const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
       tooltip: {
-        mode: 'index',
-        intersect: false,
-        backgroundColor: 'rgba(12, 19, 38, 0.9)',
-        borderColor: 'rgba(255,255,255,0.1)',
-        borderWidth: 1,
-        padding: 10,
-        titleColor: '#cbd5e1',
-        bodyColor: '#e2e8f0',
+        backgroundColor: 'rgba(12,19,38,0.9)',
+        titleColor: '#22d3ee',
+        bodyColor: '#f8fafc',
         displayColors: false,
       },
     },
     scales: {
-      x: {
-        grid: { display: false },
-        ticks: { display: false },
-      },
-      y: {
-        grid: { color: 'rgba(255,255,255,0.06)' },
-        ticks: { display: false },
-      },
+      x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+      y: { 
+        
+        grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { display: false } },
     },
-    interaction: { intersect: false, mode: 'nearest' },
-    animation: { duration: 600 },
   };
 
   return (
     <>
-      <div
-        className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity ${
-          isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
-        onClick={onClose}
-        aria-hidden="true"
-      ></div>
-      <div
-        className={`fixed right-0 top-0 z-50 h-full w-full max-w-xl overflow-y-auto border-l border-white/10 bg-[#0c1326] shadow-2xl shadow-black/50 transition-transform lg:max-w-3xl transform ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="drawerTitle"
-      >
-        <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+      <div className="fixed inset-0 bg-black/60" onClick={onClose}></div>
+      <div className="fixed right-0 top-0 z-50 h-full w-full max-w-xl bg-[#0c1326] p-5 overflow-y-auto border-l border-white/10">
+        {/* Header */}
+        <div className="flex justify-between items-center border-b border-white/10 pb-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/5 ring-1 ring-white/10">
-              <span id="drawerSymbol" className="text-sm font-semibold tracking-tight text-cyan-300">{stock.tradingSymbol.charAt(0)}</span>
+            <div className="flex items-center justify-center w-9 h-9 bg-white/5 rounded-lg ring-1 ring-white/10">
+              <span className="text-cyan-300 font-semibold">{stock.tradingSymbol.charAt(0)}</span>
             </div>
             <div className="flex flex-col">
-              <h3 id="drawerTitle" className="text-[20px] tracking-tight font-semibold text-white">{stock.tradingSymbol}</h3>
-              <p className="text-xs text-slate-400">Details</p>
+              <h3 className="text-white font-semibold text-lg">{stock.tradingSymbol}</h3>
+              <p className="text-slate-400 text-xs">Details</p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <button onClick={onClose} className="rounded-lg border border-white/10 bg-white/5 p-2 transition hover:border-rose-400/40 hover:bg-rose-400/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400/30" aria-label="Close panel">
-              <X className="h-4 w-4 text-slate-300" />
-            </button>
+          <button
+            onClick={onClose}
+            className="rounded-lg border border-white/10 bg-white/5 p-2 hover:border-rose-400/40 hover:bg-rose-400/10"
+          >
+            <X className="h-4 w-4 text-slate-300" />
+          </button>
+        </div>
+
+        {/* Prices */}
+        <div className="rounded-xl border border-white/10 bg-white/5 p-4 mt-4">
+          <div className="flex justify-between">
+            <div>
+              <p className="text-xs text-slate-400 uppercase">Capital LTP</p>
+              <span className="text-white font-semibold text-xl">₹{formatPrice(stock.capitalMarketLastTradedPrice)}</span>
+            </div>
+            <div className="text-right">
+              <p className="text-xs text-slate-400 uppercase">Futures LTP</p>
+              <span className="text-white font-semibold text-xl">₹{formatPrice(stock.futuresLastTradedPrice)}</span>
+            </div>
+          </div>
+          <span className={`inline-flex items-center gap-1 mt-2 px-2 py-[2px] text-xs rounded-full border border-${trendColor}-500/30 bg-${trendColor}-500/10 text-${trendColor}-300`}>
+            {trendIcon} {isPositive ? '+' : ''}{formatPercentage(stock.percentageChange)}%
+          </span>
+
+          {/* Chart */}
+          <div className="mt-4">
+            <p className="text-white font-semibold text-sm">Price Trend</p>
+            <div className="flex gap-2 my-2">
+              <button
+                onClick={() => setTimeframe('day')}
+                className={`px-3 py-1 rounded text-xs ${timeframe === 'day' ? 'bg-cyan-500/20 text-cyan-300' : 'bg-white/10 text-slate-400'}`}
+              >Daywise</button>
+              <button
+                onClick={() => setTimeframe('month')}
+                className={`px-3 py-1 rounded text-xs ${timeframe === 'month' ? 'bg-cyan-500/20 text-cyan-300' : 'bg-white/10 text-slate-400'}`}
+              >Monthwise</button>
+              <select value={year} onChange={e => setYear(e.target.value)} className="bg-[#0b1224] text-slate-300 text-xs px-2 py-1 rounded border border-white/10">
+                {[2022, 2023, 2024, 2025].map(y => <option key={y} value={y}>{y}</option>)}
+              </select>
+            </div>
+
+            {timeframe === 'day' && (
+              <div className="flex gap-2 items-center text-xs text-slate-400 mb-2">
+                <input type="text" value={startInput} onChange={e => { const val = e.target.value; if (/^\d*$/.test(val)) { setStartInput(val); const n = Number(val); if (n >= 1 && n <= 30) setRange([n, range[1]]); } }} className="bg-[#0b1224] border border-white/10 text-slate-300 rounded px-2 py-1 w-16" />
+                <span>to</span>
+                <input type="text" value={endInput} onChange={e => { const val = e.target.value; if (/^\d*$/.test(val)) { setEndInput(val); const n = Number(val); if (n >= 1 && n <= 30) setRange([range[0], n]); } }} className="bg-[#0b1224] border border-white/10 text-slate-300 rounded px-2 py-1 w-16" />
+              </div>
+            )}
+
+            <div className="rounded-xl border border-white/10 bg-[#0b1224] p-3 h-52">
+              <Line data={chartConfig} options={chartOptions} />
+            </div>
           </div>
         </div>
 
-        <div className="space-y-6 p-5">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <div className="flex justify-between items-start">
-              <div className="flex flex-col">
-                <p className="text-xs text-slate-400 uppercase">Capital LTP</p>
-                <span className="text-[28px] font-semibold tracking-tight text-white">₹{formatPrice(stock.capitalMarketLastTradedPrice)}</span>
-              </div>
-              <div className="flex flex-col items-end">
-                <p className="text-xs text-slate-400 uppercase">Futures LTP</p>
-                <span className="text-[28px] font-semibold tracking-tight text-white">₹{formatPrice(stock.futuresLastTradedPrice)}</span>
-              </div>
-            </div>
-            <span className={`inline-flex items-center rounded-full border px-2 py-[2px] text-xs mt-3 gap-1.5 ${pillStyle}`}>
-              {trendIcon}
-              <span className="font-semibold">{isPositive ? '+' : ''}{formatPercentage(stock.percentageChange)}%</span>
-            </span>
-
-            <div className="mt-4">
-              <p className="text-sm tracking-tight font-semibold text-white">Price Trend</p>
-              <p className="text-xs text-slate-400">Synthetic last 30 ticks</p>
-            </div>
-            <div className="relative mt-2">
-              <div className="rounded-xl border border-white/10 bg-[#0b1224] p-3">
-                <div className="h-44 w-full">
-                  <Line data={data} options={options} />
-                </div>
-              </div>
-            </div>
+        {/* Other Details */}
+        <div className="rounded-xl border border-white/10 bg-white/5 p-4 mt-4 grid grid-cols-2 gap-4">
+          <div className="p-3 bg-[#0b1224] rounded border border-white/10">
+            <p className="text-xs text-slate-400 uppercase">Symbol</p>
+            <span className="text-white font-semibold">{stock.tradingSymbol}</span>
           </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <h4 className="mb-3 text-[18px] tracking-tight font-semibold text-white">Details</h4>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-xl border border-white/10 bg-[#0b1224] p-3">
-                <p className="text-xs text-slate-400 uppercase">Symbol</p>
-                <span className="text-sm font-semibold tracking-tight text-white mt-1 block">{stock.tradingSymbol}</span>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-[#0b1224] p-3">
-                <p className="text-xs text-slate-400 uppercase">Last Updated</p>
-                <span className="text-sm font-semibold tracking-tight text-white mt-1 block">{updatedText}</span>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-[#0b1224] p-3">
-                <p className="text-xs text-slate-400 uppercase">Capital</p>
-                <span className="text-sm font-semibold tracking-tight text-white mt-1 block">₹{formatPrice(stock.capitalMarketLastTradedPrice)}</span>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-[#0b1224] p-3">
-                <p className="text-xs text-slate-400 uppercase">Futures</p>
-                <span className="text-sm font-semibold tracking-tight text-white mt-1 block">₹{formatPrice(stock.futuresLastTradedPrice)}</span>
-              </div>
-            </div>
+          <div className="p-3 bg-[#0b1224] rounded border border-white/10">
+            <p className="text-xs text-slate-400 uppercase">Last Updated</p>
+            <span className="text-white font-semibold">{lastUpdated}</span>
           </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-            <h4 className="mb-3 text-[18px] tracking-tight font-semibold text-white">About</h4>
-            <p className="text-sm leading-relaxed text-slate-300">{stock.about}</p>
+          <div className="p-3 bg-[#0b1224] rounded border border-white/10">
+            <p className="text-xs text-slate-400 uppercase">Capital</p>
+            <span className="text-white font-semibold">₹{formatPrice(stock.capitalMarketLastTradedPrice)}</span>
           </div>
+          <div className="p-3 bg-[#0b1224] rounded border border-white/10">
+            <p className="text-xs text-slate-400 uppercase">Futures</p>
+            <span className="text-white font-semibold">₹{formatPrice(stock.futuresLastTradedPrice)}</span>
+          </div>
+        </div>
+
+        {/* About */}
+        <div className="rounded-xl border border-white/10 bg-white/5 p-4 mt-4">
+          <h4 className="text-white font-semibold mb-2">About</h4>
+          <p className="text-slate-300 text-sm">{stock.about}</p>
         </div>
       </div>
     </>
