@@ -11,7 +11,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { formatPrice, formatPercentage } from '../utils/formatters';
+import { formatPrice } from '../utils/formatters';
 import useRelativeTime from '../hooks/useRelativeTime';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
@@ -23,6 +23,7 @@ const StockDrawer = ({ stock, isOpen, onClose }) => {
   const [range, setRange] = useState([1, 30]); // default 1-30 days
   const [startInput, setStartInput] = useState('1');
   const [endInput, setEndInput] = useState('30');
+
 
   const lastUpdated = useRelativeTime(stock?.lastUpdatedTimestamp);
 
@@ -95,13 +96,22 @@ const StockDrawer = ({ stock, isOpen, onClose }) => {
   }
 
   // trend
-  const isPositive = stock.percentageChange >= 0;
-  const trendColor = isPositive ? 'emerald' : 'rose';
-  const trendIcon = isPositive ? <TrendingUp size={16} /> : <TrendingDown size={16} />;
+  const percentage = stock.percentageChange;
+  const isPositive = percentage >= 0;
+  const changeDisplay = `${Math.abs(percentage).toFixed(2)} %`;
+  const changeColor = isPositive ? 'bg-green-900/30 text-green-400 border-green-500/30' : 'bg-red-900/30 text-red-400 border-red-500/30';
+  const changeIcon = isPositive ? <TrendingUp size={14} /> : <TrendingDown size={14} />;
 
   // chart labels
   const totalLabels = timeframe === 'day' ? 30 : 12;
-  const labelsAll = Array.from({ length: totalLabels }, (_, i) => timeframe === 'day' ? `D${i + 1}` : `M${i + 1}`);
+  const isMobile = window.innerWidth < 640;
+  const labelsAll = Array.from({ length: totalLabels }, (_, i) => {
+    if (timeframe === 'day') {
+      return isMobile ? `${i + 1}` : `D${i + 1}`;
+    } else {
+      return isMobile ? `${i + 1}` : `M${i + 1}`;
+    }
+  });
   const labels = labelsAll.slice(range[0] - 1, range[1]);
   const dataSlice = chartData.slice(range[0] - 1, range[1]);
 
@@ -139,17 +149,19 @@ const StockDrawer = ({ stock, isOpen, onClose }) => {
       },
     },
     scales: {
-      x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
-      y: { 
-        
-        grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { display: false } },
+      x: { grid: { color: 'rgba(255,255,255,0.05)' }, 
+      ticks: { color: '#94a3b8', font: { size: isMobile ? 9 : 10 } } },
+      y: {
+
+        grid: { color: 'rgba(255,255,255,0.08)' }, ticks: { display: false }
+      },
     },
   };
 
   return (
     <>
       <div className="fixed inset-0 bg-black/60" onClick={onClose}></div>
-      <div className="fixed right-0 top-0 z-50 h-full w-full max-w-xl bg-[#0c1326] p-5 overflow-y-auto border-l border-white/10">
+      <div className="fixed right-0 top-0 z-50 h-full w-full  max-w-5xl bg-[#0c1326] p-5 overflow-y-auto border-l border-white/10">
         {/* Header */}
         <div className="flex justify-between items-center border-b border-white/10 pb-4">
           <div className="flex items-center gap-3">
@@ -181,8 +193,8 @@ const StockDrawer = ({ stock, isOpen, onClose }) => {
               <span className="text-white font-semibold text-xl">₹{formatPrice(stock.futuresLastTradedPrice)}</span>
             </div>
           </div>
-          <span className={`inline-flex items-center gap-1 mt-2 px-2 py-[2px] text-xs rounded-full border border-${trendColor}-500/30 bg-${trendColor}-500/10 text-${trendColor}-300`}>
-            {trendIcon} {isPositive ? '+' : ''}{formatPercentage(stock.percentageChange)}%
+          <span className={`inline-flex items-center gap-1 mt-2 px-2 py-[2px] text-xs rounded-full border ${changeColor}`}>
+            {changeIcon} {changeDisplay}
           </span>
 
           {/* Chart */}
@@ -198,7 +210,7 @@ const StockDrawer = ({ stock, isOpen, onClose }) => {
                 className={`px-3 py-1 rounded text-xs ${timeframe === 'month' ? 'bg-cyan-500/20 text-cyan-300' : 'bg-white/10 text-slate-400'}`}
               >Monthwise</button>
               <select value={year} onChange={e => setYear(e.target.value)} className="bg-[#0b1224] text-slate-300 text-xs px-2 py-1 rounded border border-white/10">
-                {[2022, 2023, 2024, 2025].map(y => <option key={y} value={y}>{y}</option>)}
+                {[2024, 2025].map(y => <option key={y} value={y}>{y}</option>)}
               </select>
             </div>
 
@@ -210,7 +222,7 @@ const StockDrawer = ({ stock, isOpen, onClose }) => {
               </div>
             )}
 
-            <div className="rounded-xl border border-white/10 bg-[#0b1224] p-3 h-52">
+            <div className="rounded-xl border border-white/10 bg-[#0b1224] p-3 lg:h-[300px] h-[250px]">
               <Line data={chartConfig} options={chartOptions} />
             </div>
           </div>
